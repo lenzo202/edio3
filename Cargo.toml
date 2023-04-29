@@ -9,7 +9,7 @@ name = "edio3"
 crate-type = ["cdylib"]
 
 [dependencies]
-edi = { version = "0.2.0", path = "../edi" }
+edi = { git = "https://github.com/lenzo202/edi.git" }
 pyo3 = {version = "0.18.1", features = ["serde"]}
 pythonize = "0.18.0"
 serde = "1.0.160"

@@ -44,6 +44,7 @@ dependencies = [
 [[package]]
 name = "edi"
 version = "0.2.0"
+source = "git+https://github.com/lenzo202/edi.git#de27cb221132c520ecfa5e9a5e3831e4d29dbd47"
 dependencies = [
  "csv",
  "lazy_static",
