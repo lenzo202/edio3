@@ -9,7 +9,6 @@ use std::fmt;
 struct PyEdiDocument<'a>(EdiDocument<'a>);
 
 impl<'a, 'b> IntoPy<PyObject> for PyEdiDocument<'a> {
-    // TODO: impl this for PyEdiDocument
     fn into_py(self, py: Python<'_>) -> PyObject {
         pythonize(py, &self.0).unwrap()
     }
@@ -19,13 +18,6 @@ impl<'a, 'b> IntoPy<PyObject> for PyEdiDocument<'a> {
 struct PyEdiParseError {
     message: String,
 }
-
-// impl Deref for PyEdiParseError {
-//     type Target = EdiParseError;
-//     fn deref(&self) -> &Self::Target {
-//         &self
-//     }
-// }
 
 impl fmt::Display for PyEdiParseError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -45,7 +37,7 @@ impl std::convert::From<PyEdiParseError> for PyErr {
 impl std::convert::From<EdiParseError> for PyEdiParseError {
     fn from(other: EdiParseError) -> Self {
         Self {
-            message: other.to_string().clone(),
+            message: other.to_string(),
         }
     }
 }
