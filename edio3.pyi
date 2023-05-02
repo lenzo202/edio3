@@ -48,7 +48,7 @@ class Transaction(TypedDict):
     
 class GenericSegment(TypedDict):
     segment_abbreviation: str
-    elements: str
+    elements: list[str]
     
 
 def rs_parse(path:str) -> EdiDocument:
