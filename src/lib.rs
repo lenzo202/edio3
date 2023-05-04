@@ -65,11 +65,18 @@ fn rs_parse(path: &str) -> Result<PyObject, PyEdiParseError> {
 
 #[pyfunction]
 fn rs_to_x12_string(edi_obj: &PyDict) -> String {
-    // deserialize here requires fork of edi
+    // deserialize here requires fork of edi crate
     // where Transaction.transaction_name is Cow<'a, str> instead of &'b str
     // see https://users.rust-lang.org/t/solved-serde-deserialize-str-containig-special-chars/27218
     let doc: EdiDocument = depythonize(edi_obj).unwrap();
     doc.to_x12_string()
+}
+
+#[pyfunction]
+fn rs_to_json(path: &str) -> Result<String, PyEdiParseError> {
+    let contents = std::fs::read_to_string(path).unwrap();
+    let document = parse(&contents).unwrap();
+    Ok(serde_json::to_string(&document).unwrap())
 }
 
 /// A Python module implemented in Rust.
@@ -78,5 +85,6 @@ fn edio3(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(rs_parse, m)?)?;
     m.add_function(wrap_pyfunction!(rs_loose_parse, m)?)?;
     m.add_function(wrap_pyfunction!(rs_to_x12_string, m)?)?;
+    m.add_function(wrap_pyfunction!(rs_to_json, m)?)?;
     Ok(())
 }

@@ -59,3 +59,6 @@ def rs_loose_parse(path:str) -> EdiDocument:
 
 def rs_to_x12_string(path:str) -> str:
     ...
+    
+def rs_to_json(path:str) -> str:
+    ...

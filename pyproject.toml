@@ -10,7 +10,11 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
+dependencies = []
+
 
 
 [tool.maturin]
 features = ["pyo3/extension-module"]
+
+
